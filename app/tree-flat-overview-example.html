@@ -1,0 +1,25 @@
+
+<div class="account-tree-box">
+  <mat-tree  class="account-tree" [dataSource]="dataSource" [treeControl]="treeControl" >
+    <mat-tree-node #refP [ngClass]="{'n-last': node.isLast}" class="child-node {{'n-' + node.level}} " *matTreeNodeDef="let node; when !grpNode;" matTreeNodeToggle matTreeNodePadding matTreeNodePaddingIndent="0">
+      <span class="node-arrow-nox d-flex">
+        <li [ngClass]="{'node-arrow': !r , 'node-arrow-empty': r}" *ngFor="let r of dummy(refP, undefined, node.level)"></li>
+      </span>
+      <button class="node-toggle" mat-icon-button disabled></button>
+      <div class="node-icon icon-h-arw icon-ledger" [ngClass]="{'icon-main-ledger': node.mainLedger}"></div>
+      <div class="node-name">{{node.accntCode}} <span>: :</span> {{node.name}}</div>
+    </mat-tree-node>
+    <mat-tree-node #refP   class="parent-node {{'n-' + node.level}} " *matTreeNodeDef="let node; when: grpNode;" matTreeNodePadding matTreeNodePaddingIndent="0" cdkDrag [cdkDragData]="node" [ngClass]="{'no-child': !node.children.length, 'n-last': node.isLast}">
+      <span class="node-arrow-nox d-flex">
+        <li [ngClass]="{'node-arrow': !r , 'node-arrow-empty': r}" *ngFor="let r of dummy(refP, undefined, node.level)"></li>
+      </span>
+      <button class="node-toggle" mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename" [disabled]="!node.children.length">
+        <mat-icon class="mat-icon-rtl-mirror toggle-arrow">
+          {{treeControl.isExpanded(node) ? 'play_arrow' : 'play_arrow'}}
+        </mat-icon>
+      </button>
+      <div class="node-icon icon-h-arw"></div>
+      <div class="node-name">{{node.isLast}}-{{node.accntCode}} <span>: :</span> {{node.name}} </div>
+    </mat-tree-node>
+  </mat-tree>
+</div>

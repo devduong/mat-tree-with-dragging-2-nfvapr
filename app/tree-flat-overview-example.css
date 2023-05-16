@@ -1,0 +1,11 @@
+.d-flex {
+  display: flex;
+}
+.ml-2 {
+  margin-left: 15px;
+}
+
+
+/* .account-tree-box mat-tree-node:last-child {
+  background: red;
+} */
